@@ -25,11 +25,6 @@ contract Dominum is ERC20, Ownable {
         lastMintTime = block.timestamp;
     }
 
-    function mint(address to, uint256 amount) external onlyOwner {
-        require(totalSupply() + amount <= TOTAL_SUPPLY, "Max supply reached");
-        _mint(to, amount);
-    }
-
     function transfer(address recipient, uint256 amount) public override returns (bool) {
         uint256 taxAmount = (amount * TAX_RATE) / 10000;
         uint256 sendAmount = amount - taxAmount;
